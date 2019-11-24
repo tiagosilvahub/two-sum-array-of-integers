@@ -5,10 +5,10 @@ You may assume that each input would have exactly one solution, and you may not 
 
 Example:
 ```
-  Given nums = [2, 7, 11, 15], target = 9,
+Given nums = [2, 7, 11, 15], target = 9,
 
-  Because nums[0] + nums[1] = 2 + 7 = 9,
-  return [0, 1].
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
 ```
 
 We can understand the problem description as: there's a combination of 2 integers in the given array that sum to the target.
@@ -16,16 +16,16 @@ We can understand the problem description as: there's a combination of 2 integer
 Immediately, we find a solution:
 
 ```
-    public int[] solve(int[] nums, int target) {
-        for(int i = 0; i < nums.length; i++) {
-            for(int j = 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target && i!=j) {
-                    return new int[]{i,j};
-                }
+public int[] solve(int[] nums, int target) {
+    for(int i = 0; i < nums.length; i++) {
+        for(int j = 1; j < nums.length; j++) {
+            if (nums[i] + nums[j] == target && i!=j) {
+                return new int[]{i,j};
             }
         }
-        return new int[]{0,0};
     }
+    return new int[]{0,0};
+}
 ```
 
 This solution has O(n^2) time complexity. It solves the problem, but it is not very interesting.
@@ -41,18 +41,18 @@ Rather than trying all combinations, we should know what we are looking for. Com
 So while going over the array, we should store the complements we would need to reach our target, then for each new array position we check if we just found a complement:
 
 ```
-    public int[] solve(int[] nums, int target) {
-        HashSet<Integer> hash = new HashSet<>();
-        for(int i = 0; i < nums.length; i++) {
-            if(hash.contains(target - nums[i])){
-                int j = i;
-                while(nums[--i] != target - nums[j]){} //trace back the array position
-                return new int[]{i,j};
-            }
-            hash.add(nums[i]);
+public int[] solve(int[] nums, int target) {
+    HashSet<Integer> hash = new HashSet<>();
+    for(int i = 0; i < nums.length; i++) {
+        if(hash.contains(target - nums[i])){
+            int j = i;
+            while(nums[--i] != target - nums[j]){} //trace back the array position
+            return new int[]{i,j};
         }
-        return new int[]{0,0};
+        hash.add(nums[i]);
     }
+    return new int[]{0,0};
+}
 ```
 
 We have reached O(n) time. Thanks to hash operations, checking if the complement of a number was previously found can be done in amortized O(1) time. 
@@ -61,12 +61,12 @@ But we can do better, by simply storing the array position with the complement, 
 
 
 ```
-        Map<Integer,Integer> map = new HashMap<>();
-        for(int i = 0; i < nums.length; i++) {
-            if(map.containsKey(target - nums[i])){
-                return new int[]{map.get(target - nums[i]), i};
-            }
-            map.put(nums[i],i);
-        }
-        return new int[]{0,0};
+Map<Integer,Integer> map = new HashMap<>();
+for(int i = 0; i < nums.length; i++) {
+    if(map.containsKey(target - nums[i])){
+        return new int[]{map.get(target - nums[i]), i};
+    }
+    map.put(nums[i],i);
+}
+return new int[]{0,0};
 ```
