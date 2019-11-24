@@ -32,8 +32,6 @@ This solution has O(n^2) time complexity. It solves the problem, but it is not v
 
 However, we can quickly reason that there should be a better solution. 
 
-But intuitively, we can see that we are checking combinations that would never work.
-
 For example, for a target of 9, any number that is bigger than 9 won't be part of the solution. It is a waste of time to sum that number with every other number.
 
 Rather than trying all combinations, we should know what we are looking for. Complements. If we see a 2 and the target is 9, we will solve the problem if we find a 7. 2 and 7 being complements to reach 9.
