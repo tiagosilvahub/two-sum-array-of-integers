@@ -11,7 +11,7 @@ Example:
   return [0, 1].
 ```
 
-We can understnad the problem description as: there's a combination of 2 integers in the given array that sum to the target.
+We can understand the problem description as: there's a combination of 2 integers in the given array that sum to the target.
 
 Immediately, we find a solution:
 
@@ -57,7 +57,7 @@ So while going over the array, we should store the complements we would need to 
 
 We have reached O(n) time. Thanks to hash operations, checking if the complement of a number was previously found can be done in amortized O(1) time. 
 
-But we can do better, by simply storing the array position with the complement, we can immediately return the solution when we find a complement pair instead of tracing back:
+But we can do better, by simply storing the array position with the complement, we can immediately return the solution when we find a complementing pair instead of tracing back:
 
 
 ```
