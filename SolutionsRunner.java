@@ -9,9 +9,11 @@ public class SolutionsRunner {
                         new complementsHashMapStrategy()
                 };
 
-        var input = new int[][]{ new int[] {2, 7, 11, 15}};
-        var input2 = new int[]{ 9 };
-        var output = new int[][]{ new int[] {0, 1} };
+        var input = new int[][]{ new int[] {2, 7, 11, 15},
+                                 new int[] {2, 7, 11, 15, 16, 19, 21, 22, 25, 31}};
+        var input2 = new int[]{ 9, 28 };
+        var output = new int[][]{ new int[] {0, 1},
+                                  new int[] {1, 6}};
 
         int[] result;
         int errors = 0;
